@@ -1,0 +1,10 @@
+// docs of different tool with chapters and outlines
+// list of /dev/ptys
+// list of tmux sessions, spawn terminal with one
+// list of git checkouts, spawn terminal in one
+// xbacklight slider
+// sudo iw dev wlp3s0 scan
+// sudo systemctl restart tor
+// sudo systemctl restart mullvad-daemon
+// sudo systemctl restart cups
+

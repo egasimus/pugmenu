@@ -1,0 +1,9 @@
+Menu(icon="src/icon.png")
+  Menu Tmux
+  Menu Git
+  Menu Network
+    Run(command="gksudo systemctl restart tor") Restart Tor
+    Run(command="gksudo systemctl restart mullvad-daemon") Restart VPN
+    Run(command="gksudo iw dev wlp3s0 scan") Rescan wlp3s0
+  Menu Printing
+    Run(command="gksudo systemctl restart cups") Restart CUPS
