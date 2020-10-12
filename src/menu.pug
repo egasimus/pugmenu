@@ -1,33 +1,30 @@
 Menu(icon="src/icon.png")
 
   Menu(label="Documentation")
-    Open(label="NixOS Packages").
-      https://search.nixos.org/packages
-    Open(label="NixOS Options").
-      https://search.nixos.org/options
-    Open(label="Nixpkgs Manual").
-      https://nixos.org/manual/nixpkgs/stable/
+    Open(label="NixOS Packages") https://search.nixos.org/packages
+    Open(label="NixOS Options") https://search.nixos.org/options
+    Open(label="Nixpkgs Manual") https://nixos.org/manual/nixpkgs/stable/
 
-  Run(label="Powersave").
-    gksudo 'cpupower frequency-set -u 800 -d 800'
-    xbacklight -set 10
-  Run(label="Performance").
-    gksudo 'cpupower frequency-set -g performance'
-    xbacklight -set 100
+  Menu(label="Power")
+    Run(label="Powersave").
+      gksudo 'cpupower frequency-set -u 800 -d 800'
+      xbacklight -set 10
+    Run(label="Performance").
+      gksudo 'cpupower frequency-set -g performance'
+      xbacklight -set 100
+    Run(label="Lock & Sleep").
+      i3lock
+      systemctl suspend
 
   Menu(label="Consoles")
 
   Menu(label="Repositories")
 
   Menu(label="Network")
-    Run(label="Restart Tor").
-      gksudo 'systemctl restart tor'
-    Run(label="Restart VPN").
-      gksudo 'systemctl restart mullvad-daemon'
-    Run(label="Rescan wireless networks").
-      gksudo 'iw dev wlp3s0 scan'
+    Run(label="Rescan wireless networks") gksudo 'iw dev wlp3s0 scan'
+    Run(label="Reconnect VPN") mullvad reconnect
+    Run(label="Restart Tor") gksudo 'systemctl restart tor'
+    Run(label="Restart VPN") gksudo 'systemctl restart mullvad-daemon'
 
   Menu(label="Printing")
-    Run(label="Restart printing service").
-      gksudo 'systemctl restart cups'
-
+    Run(label="Restart printing service") gksudo 'systemctl restart cups'
