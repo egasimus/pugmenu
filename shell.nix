@@ -14,7 +14,7 @@ stdenv.mkDerivation {
   src = ./.;
   nativeBuildInputs = [python2 pkg-config nodePackages.npm];
   buildInputs = [gtk3 gobject-introspection glib cairo dbus];
-  propagatedBuildInputs = [nodejs];
+  propagatedBuildInputs = [nodejs-10_x];
   LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
     gtk3
     gobject-introspection

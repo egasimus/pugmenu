@@ -1,10 +1,39 @@
 #!/usr/bin/env node
 
-const GI = require('node-gtk')
-GI.startLoop()
+const parseArgs = () => require('yargs')
+  // tray mode
+  .alias   ('tray', 't')
+  .describe('tray', 'spawn as tray icon')
+  // TODO: desktop mode
+  .alias   ('desktop', 'd')
+  .describe('desktop', 'spawn as button on desktop')
+  // TODO: disable watcher
+  .alias   ('nowatch', 'nw')
+  .describe('nowatch', 'don\'t watch the configuration file for updates')
+  // TODO: style override
+  .alias   ('style', 's')
+  .describe('style', 'use a custom stylesheet to override styling')
+  .nargs   ('style', 1)
+  // main configuration file
+  .command('$0 <menu>', 'Creates a menu based on a Pug configuration file.', ()=>{}, ()=>{})
+  // help
+  .help('help')
+  // go
+  .argv
 
-const GTK = GI.require('Gtk', '3.0')
-GTK.init()
+if (require.main === module) main()
 
-const run = require('./src/UIBuilder')(GTK)
-run()
+function main () {
+
+  const args = parseArgs()
+
+  const GI = require('node-gtk')
+  GI.startLoop()
+
+  const GTK = GI.require('Gtk', '3.0')
+  GTK.init()
+
+  const run = require('./src/UIBuilder')(GTK, args.menu)
+  run()
+
+}

@@ -5,12 +5,27 @@ const parse = require('pug-parser')
 
 module.exports = makeUI
 
-function makeUI (GTK) {
+function makeUI (GTK, configPath) {
 
-  const config = require('fs').readFileSync(`${__dirname}/menu.pug`, 'utf8')
-  const specs = parseConfig(config)
+  configPath = require('path').resolve(configPath)
+
+  let config
+  try {
+    config = require('fs').readFileSync(configPath, 'utf8')
+  } catch (e) {
+    console.error(`could not read ${configPath}`)
+    process.exit(1)
+  }
+
+  let specs
+  try {
+    specs = parseConfig(config)
+  } catch (e) {
+    console.error(`could not parse ${configPath}`)
+    process.exit(2)
+  }
+
   const build = getBuilder(GTK)
-
   for (let menuSpec of specs) {
     console.log(require('util').inspect(menuSpec, { depth: Infinity }))
     const menu = build(menuSpec)
@@ -64,6 +79,8 @@ function getBuilder (GTK) {
 
     const icon = new GTK.StatusIcon.newFromFile(JSON.parse(args.icon))
     const menu = new GTK.Menu()
+    console.log(Object.keys(GTK).sort().join('\n'))
+    icon.connect('activate', ()=>show(0, GTK.getCurrentEventTime()))
     icon.connect('popup-menu', show)
 
     return [icon, menu, ...kids.map(kid=>{

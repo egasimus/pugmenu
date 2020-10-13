@@ -1,3 +1,6 @@
+# This is an example of a different language.
+# It doesn't work.
+
 Format:
   One: Menu
   Menu: Label
