@@ -28,9 +28,9 @@ Menu(icon="icon.png")
 
   Menu(label="Network")
     Run(label="Rescan wireless networks") gksudo 'iw dev wlp3s0 scan'
-    Run(label="Reconnect VPN") mullvad reconnect
     Run(label="Restart Tor") gksudo 'systemctl restart tor'
     Run(label="Restart VPN") gksudo 'systemctl restart mullvad-daemon'
+    Run(label="Reconnect VPN") mullvad reconnect
 
   Menu(label="Printing")
     Run(label="Restart printing service") gksudo 'systemctl restart cups'
