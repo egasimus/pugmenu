@@ -1,4 +1,4 @@
-Menu(icon="src/icon.png")
+Menu(icon="icon.png")
 
   Menu(label="Documentation")
     Open(label="NixOS Packages") https://search.nixos.org/packages
@@ -19,6 +19,12 @@ Menu(icon="src/icon.png")
   Menu(label="Consoles")
 
   Menu(label="Repositories")
+    Menu(label="Origins")
+      each x in "/srv/git"
+        Open(label=x)= `/srv/git/${x}`
+    Menu(label="Mirrors")
+      each x in "/srv/git-mirrors"
+        Open(label=x)= `/srv/git-mirrors/${x}`
 
   Menu(label="Network")
     Run(label="Rescan wireless networks") gksudo 'iw dev wlp3s0 scan'
