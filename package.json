@@ -1,4 +1,9 @@
 {
+  "name": "pugmenu",
+  "version": "0.1.0",
+  "bin": {
+    "pugmenu": "./pugmenu"
+  },
   "dependencies": {
     "dbus": "^1.0.7",
     "node-gtk": "^0.4.0",

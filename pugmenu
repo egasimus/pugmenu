@@ -2,9 +2,11 @@
 
 const parseArgs = () => require('yargs')
   // tray mode
+  // TODO: specify tray/screen mode in config instead
   .alias   ('tray', 't')
   .describe('tray', 'spawn as tray icon')
   // TODO: desktop mode
+  // TODO: specific screen(s) or all screens
   .alias   ('desktop', 'd')
   .describe('desktop', 'spawn as button on desktop')
   // TODO: disable watcher
