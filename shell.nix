@@ -1,25 +1,20 @@
-with import <nixpkgs> {};
-#let
-  #systemd-glib = stdenv.mkDerivation {
-    #name = "systemd-glib";
-    #src = stdenv.fetchFromGitHub {
-      #owner = "tcbrindle";
-      #repo = "systemd-glib";
-      #rev = ""
-    #};
-  #};
-#in
-stdenv.mkDerivation {
-  name = "node-gtk-test";
-  src = ./.;
-  nativeBuildInputs = [python2 pkg-config nodePackages.npm];
-  buildInputs = [gtk3 gobject-introspection glib cairo dbus];
-  propagatedBuildInputs = [nodejs-10_x];
-  LD_LIBRARY_PATH = lib.strings.makeLibraryPath [
-    gtk3
-    gobject-introspection
-    glib
+let
+  pkgs = import <nixpkgs> {};
+  nativeLibs = with pkgs; [
     cairo
     dbus
+    glib
+    gobject-introspection
+    gtk3
   ];
+in pkgs.stdenv.mkDerivation rec {
+  name = "pugmenu";
+  src = ./.;
+  buildInputs = with pkgs; [
+    nodejs-12_x
+    python2
+    pkg-config
+    nodePackages.npm
+  ] ++ nativeLibs;
+  LD_LIBRARY_PATH = pkgs.lib.strings.makeLibraryPath nativeLibs;
 }
